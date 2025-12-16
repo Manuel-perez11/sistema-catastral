@@ -495,7 +495,7 @@ export default function CatastroSearch() {
                         <div className="mt-4 sm:mt-6 bg-gradient-to-r from-red-100 to-green-100 p-3 sm:p-4 rounded-xl border-2 border-red-300 text-center">
                             <p className="text-sm sm:text-lg font-bold text-gray-800 flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2">
                                 <span className="flex items-center gap-1">🎄 <span className="text-red-700">¡Feliz Navidad!</span></span>
-                                <span className="flex items-center gap-1">⛄ <span className="text-green-700">¡Próspero Año Nuevo 2025!</span> 🎅</span>
+                                <span className="flex items-center gap-1">⛄ <span className="text-green-700">¡Próspero Año Nuevo 2026!</span> 🎅</span>
                             </p>
                         </div>
                     </div>
