@@ -199,15 +199,15 @@ export default function CatastroSearch() {
           <ul className="text-base space-y-2 list-disc list-inside text-gray-600">
             <li className="flex items-start">
               <span className="font-semibold text-blue-600 mr-2">•</span>
-              Asegúrate de escribir tu **nombre completo** y correctamente.
+              Asegúrate de escribir tu nombre completo y correctamente Nota: En caso que no aparezca con el nombre completo asegurate de que tu propiedad este registrada en el registro publico de la propiedad..
             </li>
             <li className="flex items-start">
               <span className="font-semibold text-blue-600 mr-2">•</span>
-              La clave catastral es un requisito **indispensable** para realizar el pago de tu predial.
+              La clave catastral es un requisito indispensable para realizar el pago de tu predial.
             </li>
             <li className="flex items-start">
               <span className="font-semibold text-blue-600 mr-2">•</span>
-              Para dudas o aclaraciones, comunícate al número **(674) 526 0041** de la Dirección de Catastro.
+              Para dudas o aclaraciones, comunícate al número (649) 526 0041 de Presidencia Municipal.
             </li>
           </ul>
         </div>
