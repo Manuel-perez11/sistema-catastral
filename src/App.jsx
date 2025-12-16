@@ -492,7 +492,7 @@ export default function CatastroSearch() {
                         {/* Mensaje navideño adicional */}
                         <div className="mt-6 bg-gradient-to-r from-red-100 to-green-100 p-4 rounded-xl border-2 border-red-300 text-center">
                             <p className="text-lg font-bold text-gray-800 flex items-center justify-center gap-2">
-                                🎄 <span className="text-red-700">¡Feliz Navidad!</span> ⛄ <span className="text-green-700">¡Próspero Año Nuevo 2025!</span> 🎅
+                                🎄 <span className="text-red-700">¡Feliz Navidad!</span> ⛄ <span className="text-green-700">¡Próspero Año Nuevo 2026!</span> 🎅
                             </p>
                         </div>
                     </div>
