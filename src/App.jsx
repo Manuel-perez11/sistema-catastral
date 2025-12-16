@@ -138,7 +138,7 @@ export default function CatastroSearch() {
         <div className="bg-white rounded-2xl shadow-2xl p-6 mb-6">
           <div className="flex items-center gap-4">
             <img
-              src="https://i.ibb.co/9hKC5xM/eloro-logo.png"
+              src="/logo.png"
               alt="Logo El Oro"
               className="w-20 h-20"
             />
