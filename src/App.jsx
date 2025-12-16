@@ -148,7 +148,7 @@ export default function CatastroSearch() {
               </h2>
               <p className="text-lg text-gray-600 font-semibold">2025-2028</p>
               <p className="text-sm text-blue-600 font-semibold">
-                Recaudación de Rentas
+                Dirección De Catastro
               </p>
             </div>
           </div>
