@@ -312,7 +312,7 @@ export default function CatastroSearch() {
                 
                 <div className="max-w-4xl mx-auto px-4 relative z-10">
                     {/* ENCABEZADO con animaciones mejoradas y tema navideño */}
-                    <header className="bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl p-6 mb-8 flex flex-col sm:flex-row gap-4 items-center transform transition-all duration-500 hover:scale-[1.02] hover:shadow-4xl border-4 border-red-200 animate-slide-in-down relative overflow-hidden group">
+                    <header className="bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl p-4 sm:p-6 mb-6 sm:mb-8 flex flex-col sm:flex-row gap-3 sm:gap-4 items-center transform transition-all duration-500 hover:scale-[1.02] hover:shadow-4xl border-4 border-red-200 animate-slide-in-down relative overflow-hidden group">
                         {/* Guirnalda decorativa superior */}
                         <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-red-500 via-green-500 to-red-500"></div>
                         
@@ -322,49 +322,49 @@ export default function CatastroSearch() {
                             <img 
                                 src="/logo.png" 
                                 alt="Logo El Oro" 
-                                className="w-24 h-24 object-contain rounded-full border-4 border-red-500 p-1 shadow-lg transition-all duration-500 hover:rotate-[360deg] hover:scale-110 hover:border-green-500" 
+                                className="w-20 h-20 sm:w-24 sm:h-24 object-contain rounded-full border-4 border-red-500 p-1 shadow-lg transition-all duration-500 hover:rotate-[360deg] hover:scale-110 hover:border-green-500" 
                             />
-                            <div className="absolute -top-2 -right-2 text-3xl animate-swing">🎅</div>
+                            <div className="absolute -top-2 -right-2 text-2xl sm:text-3xl animate-swing">🎅</div>
                             <div className="absolute -bottom-1 -left-1">
-                                <Sparkles className="text-yellow-400 animate-sparkle" size={24} />
+                                <Sparkles className="text-yellow-400 animate-sparkle" size={20} />
                             </div>
                         </div>
                         
-                        <div className="relative z-10">
-                            <h2 className="text-3xl font-extrabold text-gray-800 tracking-wider bg-gradient-to-r from-red-700 to-green-700 bg-clip-text">
+                        <div className="relative z-10 text-center sm:text-left">
+                            <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-gray-800 tracking-wider bg-gradient-to-r from-red-700 to-green-700 bg-clip-text">
                                 H. AYUNTAMIENTO EL ORO, DGO
                             </h2>
-                            <p className="font-semibold text-xl text-gray-600">2025–2028</p>
-                            <p className="text-red-700 font-bold text-lg border-l-4 border-red-500 pl-3 pt-1 hover:border-green-500 transition-colors duration-300">
+                            <p className="font-semibold text-base sm:text-xl text-gray-600">2025–2028</p>
+                            <p className="text-red-700 font-bold text-sm sm:text-lg border-l-4 border-red-500 pl-3 pt-1 hover:border-green-500 transition-colors duration-300">
                                 Dirección de Catastro
                             </p>
                         </div>
                         
                         {/* Decoración navideña en la esquina */}
-                        <div className="absolute top-2 right-2 text-2xl animate-bell-ring" style={{animationDelay: '2s'}}>
+                        <div className="absolute top-2 right-2 text-xl sm:text-2xl animate-bell-ring" style={{animationDelay: '2s'}}>
                             🔔
                         </div>
                     </header>
 
                     {/* TITULO con efectos premium navideños */}
-                    <div className="text-center mb-10 text-white animate-scale-in">
+                    <div className="text-center mb-8 sm:mb-10 text-white animate-scale-in px-2">
                         {/* Banner "Felices Fiestas" */}
-                        <div className="mb-4 inline-block bg-white/20 backdrop-blur-md px-6 py-2 rounded-full border-2 border-white/30">
-                            <p className="text-xl font-bold text-white flex items-center gap-2">
+                        <div className="mb-3 sm:mb-4 inline-block bg-white/20 backdrop-blur-md px-4 sm:px-6 py-2 rounded-full border-2 border-white/30">
+                            <p className="text-base sm:text-xl font-bold text-white flex items-center gap-2">
                                 🎄 <span className="animate-pulse">¡Felices Fiestas!</span> 🎅
                             </p>
                         </div>
                         
-                        <div className="relative inline-block mb-4">
-                            <Search size={72} className="mx-auto text-white p-4 bg-gradient-to-br from-red-600 to-green-600 rounded-full shadow-2xl border-4 border-white/30 animate-christmas-glow" />
+                        <div className="relative inline-block mb-3 sm:mb-4">
+                            <Search size={56} className="sm:w-[72px] sm:h-[72px] mx-auto text-white p-3 sm:p-4 bg-gradient-to-br from-red-600 to-green-600 rounded-full shadow-2xl border-4 border-white/30 animate-christmas-glow" />
                             <div className="absolute inset-0 bg-red-400 rounded-full blur-xl opacity-50 animate-pulse"></div>
-                            <div className="absolute -top-2 -right-2 text-3xl animate-swing">⭐</div>
+                            <div className="absolute -top-2 -right-2 text-2xl sm:text-3xl animate-swing">⭐</div>
                         </div>
                         
-                        <h1 className="text-5xl md:text-6xl font-black tracking-tighter mb-4 bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent animate-gradient-x drop-shadow-2xl">
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-3 sm:mb-4 bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent animate-gradient-x drop-shadow-2xl px-2">
                             Sistema de Consulta de Clave Catastral
                         </h1>
-                        <p className="text-blue-100 mt-3 text-xl font-light max-w-2xl mx-auto leading-relaxed">
+                        <p className="text-blue-100 mt-2 sm:mt-3 text-base sm:text-xl font-light max-w-2xl mx-auto leading-relaxed px-4">
                             Ingresa tu nombre completo para obtener tu clave de forma <span className="font-semibold text-white">rápida y segura</span>.
                         </p>
                     </div>
@@ -372,12 +372,12 @@ export default function CatastroSearch() {
             </div>
 
             {/* Contenido principal */}
-            <div className="max-w-4xl mx-auto px-4 -mt-20 relative z-20">
+            <div className="max-w-4xl mx-auto px-3 sm:px-4 -mt-16 sm:-mt-20 relative z-20">
                 {/* BUSCADOR premium con tema navideño */}
-                <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl p-10 mb-8 transform transition-all duration-500 hover:shadow-4xl border-4 border-red-200 animate-slide-in-up relative overflow-hidden group">
+                <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl p-6 sm:p-10 mb-6 sm:mb-8 transform transition-all duration-500 hover:shadow-4xl border-4 border-red-200 animate-slide-in-up relative overflow-hidden group">
                     {/* Decoración navideña en esquinas */}
-                    <div className="absolute top-2 left-2 text-2xl animate-swing">🎄</div>
-                    <div className="absolute top-2 right-2 text-2xl animate-swing" style={{animationDelay: '0.5s'}}>🎁</div>
+                    <div className="absolute top-2 left-2 text-xl sm:text-2xl animate-swing">🎄</div>
+                    <div className="absolute top-2 right-2 text-xl sm:text-2xl animate-swing" style={{animationDelay: '0.5s'}}>🎁</div>
                     
                     <div className="absolute inset-0 bg-gradient-to-br from-red-50/50 via-transparent to-green-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     
@@ -388,25 +388,25 @@ export default function CatastroSearch() {
                                 placeholder="Escribe el nombre completo..."
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
-                                className="w-full px-6 py-5 pr-14 border-2 border-gray-300 rounded-2xl text-xl font-medium focus:border-blue-600 focus:ring-4 focus:ring-blue-200 outline-none transition-all duration-300 placeholder-gray-400 shadow-inner hover:border-blue-400 hover:shadow-lg"
+                                className="w-full px-4 sm:px-6 py-4 sm:py-5 pr-12 sm:pr-14 border-2 border-gray-300 rounded-2xl text-base sm:text-xl font-medium focus:border-blue-600 focus:ring-4 focus:ring-blue-200 outline-none transition-all duration-300 placeholder-gray-400 shadow-inner hover:border-blue-400 hover:shadow-lg"
                             />
                             {searching ? (
-                                <div className="absolute right-6 top-1/2 transform -translate-y-1/2">
-                                    <svg className="animate-spin h-7 w-7 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <div className="absolute right-4 sm:right-6 top-1/2 transform -translate-y-1/2">
+                                    <svg className="animate-spin h-6 w-6 sm:h-7 sm:w-7 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                     </svg>
                                 </div>
                             ) : (
-                                <Search className="absolute right-6 top-1/2 transform -translate-y-1/2 text-blue-500 transition-all duration-300 group-hover:scale-125 group-hover:rotate-12" size={28} />
+                                <Search className="absolute right-4 sm:right-6 top-1/2 transform -translate-y-1/2 text-blue-500 transition-all duration-300 group-hover:scale-125 group-hover:rotate-12" size={24} />
                             )}
                         </div>
 
                         {searchTerm && (
-                            <div className="mt-8">
+                            <div className="mt-6 sm:mt-8">
                                 {searching ? (
-                                    <div className="text-center py-8">
-                                        <p className="text-gray-500 text-lg flex items-center justify-center gap-2">
+                                    <div className="text-center py-6 sm:py-8">
+                                        <p className="text-gray-500 text-base sm:text-lg flex items-center justify-center gap-2">
                                             <svg className="animate-spin h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -415,28 +415,30 @@ export default function CatastroSearch() {
                                         </p>
                                     </div>
                                 ) : filteredResults.length ? (
-                                    <div className="space-y-4">
+                                    <div className="space-y-3 sm:space-y-4">
                                         {filteredResults.map((item, index) => (
                                             <div 
                                                 key={item.id} 
-                                                className="result-item bg-gradient-to-r from-emerald-50 via-green-50 to-emerald-50 border-l-6 border-green-600 p-6 rounded-2xl shadow-lg transition-all duration-300 transform hover:scale-[1.03] hover:shadow-2xl hover:border-emerald-600 relative overflow-hidden group"
+                                                className="result-item bg-gradient-to-r from-emerald-50 via-green-50 to-emerald-50 border-l-6 border-green-600 p-4 sm:p-6 rounded-2xl shadow-lg transition-all duration-300 transform hover:scale-[1.03] hover:shadow-2xl hover:border-emerald-600 relative overflow-hidden group"
                                                 style={{animationDelay: `${index * 0.1}s`}}
                                             >
                                                 {/* Decoración navideña en resultados */}
-                                                <div className="absolute top-2 right-2 text-xl animate-gift-bounce">🎁</div>
+                                                <div className="absolute top-2 right-2 text-lg sm:text-xl animate-gift-bounce">🎁</div>
                                                 
                                                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-shimmer"></div>
                                                 
                                                 <div className="relative z-10">
-                                                    <div className="flex items-start gap-3 mb-3">
-                                                        <span className="text-3xl flex-shrink-0 animate-bounce">👤</span>
-                                                        <p className="font-extrabold text-gray-900 text-xl leading-tight">{item.nombre}</p>
+                                                    <div className="flex items-start gap-2 sm:gap-3 mb-2 sm:mb-3">
+                                                        <span className="text-2xl sm:text-3xl flex-shrink-0 animate-bounce">👤</span>
+                                                        <p className="font-extrabold text-gray-900 text-base sm:text-xl leading-tight">{item.nombre}</p>
                                                     </div>
                                                     
-                                                    <div className="flex items-center gap-2 bg-green-100/80 backdrop-blur-sm p-4 rounded-xl border border-green-200 hover:border-green-400 transition-colors duration-300">
-                                                        <span className="text-2xl animate-pulse">🏠</span>
-                                                        <span className="font-semibold text-green-700 text-lg">Clave Catastral:</span>
-                                                        <span className="font-black text-green-900 text-2xl tracking-wider bg-white px-4 py-2 rounded-lg shadow-md">
+                                                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 bg-green-100/80 backdrop-blur-sm p-3 sm:p-4 rounded-xl border border-green-200 hover:border-green-400 transition-colors duration-300">
+                                                        <div className="flex items-center gap-2">
+                                                            <span className="text-xl sm:text-2xl animate-pulse">🏠</span>
+                                                            <span className="font-semibold text-green-700 text-sm sm:text-lg">Clave Catastral:</span>
+                                                        </div>
+                                                        <span className="font-black text-green-900 text-xl sm:text-2xl tracking-wider bg-white px-3 sm:px-4 py-2 rounded-lg shadow-md break-all">
                                                             {item.claveCatastral}
                                                         </span>
                                                     </div>
@@ -444,55 +446,56 @@ export default function CatastroSearch() {
                                             </div>
                                         ))}
                                     </div>
-                                ) : (
-                                    <div className="bg-gradient-to-r from-red-50 to-pink-50 border-l-6 border-red-600 p-6 rounded-xl shadow-lg animate-slide-in-up relative overflow-hidden">
+                                ) : debouncedSearchTerm ? (
+                                    <div className="bg-gradient-to-r from-red-50 to-pink-50 border-l-6 border-red-600 p-4 sm:p-6 rounded-xl shadow-lg animate-slide-in-up relative overflow-hidden">
                                         <div className="absolute top-0 right-0 w-32 h-32 bg-red-200 rounded-full blur-3xl opacity-20"></div>
-                                        <p className="text-red-800 font-bold text-xl mb-2 flex items-center gap-2">
-                                            <span className="text-3xl">😔</span>
-                                            Lo sentimos, no se encontraron resultados
+                                        <p className="text-red-800 font-bold text-lg sm:text-xl mb-2 flex items-center gap-2">
+                                            <span className="text-2xl sm:text-3xl">😔</span>
+                                            <span className="text-sm sm:text-base">Lo sentimos, no se encontraron resultados</span>
                                         </p>
-                                        <p className="text-red-700 text-base">
-                                            No se encontraron resultados para "<span className="font-semibold">{searchTerm}</span>". Revisa la ortografía o consulta la información importante.
+                                        <p className="text-red-700 text-sm sm:text-base">
+                                            No se encontraron resultados para "<span className="font-semibold break-words">{debouncedSearchTerm}</span>". Revisa la ortografía o consulta la información importante.
                                         </p>
                                     </div>
-                                )}
+                                ) : null}
                             </div>
                         )}
                     </div>
                 </div>
 
                 {/* INFORMACIÓN con diseño mejorado navideño */}
-                <div className="bg-gradient-to-br from-white via-red-50/30 to-green-50/30 backdrop-blur-sm rounded-2xl p-8 text-gray-800 shadow-xl border-4 border-red-200 mb-8 transition-all duration-500 hover:shadow-2xl hover:border-green-300 animate-scale-in relative overflow-hidden group">
+                <div className="bg-gradient-to-br from-white via-red-50/30 to-green-50/30 backdrop-blur-sm rounded-2xl p-6 sm:p-8 text-gray-800 shadow-xl border-4 border-red-200 mb-6 sm:mb-8 transition-all duration-500 hover:shadow-2xl hover:border-green-300 animate-scale-in relative overflow-hidden group">
                     {/* Decoraciones navideñas */}
-                    <div className="absolute top-2 right-2 text-3xl animate-swing">🎅</div>
-                    <div className="absolute bottom-2 left-2 text-2xl animate-gift-bounce">🎁</div>
+                    <div className="absolute top-2 right-2 text-2xl sm:text-3xl animate-swing">🎅</div>
+                    <div className="absolute bottom-2 left-2 text-xl sm:text-2xl animate-gift-bounce">🎁</div>
                     
                     <div className="absolute top-0 right-0 w-40 h-40 bg-red-200 rounded-full opacity-10 blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
                     <div className="absolute bottom-0 left-0 w-32 h-32 bg-green-200 rounded-full opacity-10 blur-2xl group-hover:scale-125 transition-transform duration-700"></div>
                     
                     <div className="relative z-10">
-                        <h3 className="text-3xl font-bold mb-6 text-transparent bg-gradient-to-r from-red-700 to-green-700 bg-clip-text flex items-center gap-3">
-                            <span className='text-4xl animate-bounce'>💡</span> 
-                            Información Importante
+                        <h3 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-transparent bg-gradient-to-r from-red-700 to-green-700 bg-clip-text flex items-center gap-2 sm:gap-3">
+                            <span className='text-3xl sm:text-4xl animate-bounce'>💡</span> 
+                            <span className="leading-tight">Información Importante</span>
                         </h3>
                         
-                        <ul className="space-y-4">
+                        <ul className="space-y-3 sm:space-y-4">
                             {[
                                 'Asegúrate de escribir tu nombre completo y correctamente. Nota: En caso de no aparecer con el nombre completo, asegúrate de que tu propiedad esté registrada en el Registro Público de la Propiedad.',
                                 'La clave catastral es un requisito indispensable para realizar el pago de tu predial.',
                                 'Para dudas o aclaraciones, comunícate al número (649) 526 0041 de Presidencia Municipal.'
                             ].map((text, i) => (
-                                <li key={i} className="flex items-start gap-3 bg-white/70 backdrop-blur-sm p-4 rounded-xl transition-all duration-300 hover:translate-x-2 hover:bg-white hover:shadow-md group/item border-2 border-transparent hover:border-red-200">
-                                    <span className="font-bold text-red-600 text-2xl flex-shrink-0 transition-transform duration-300 group-hover/item:scale-125">✓</span>
-                                    <span className="text-gray-700 leading-relaxed">{text}</span>
+                                <li key={i} className="flex items-start gap-2 sm:gap-3 bg-white/70 backdrop-blur-sm p-3 sm:p-4 rounded-xl transition-all duration-300 hover:translate-x-2 hover:bg-white hover:shadow-md group/item border-2 border-transparent hover:border-red-200">
+                                    <span className="font-bold text-red-600 text-xl sm:text-2xl flex-shrink-0 transition-transform duration-300 group-hover/item:scale-125">✓</span>
+                                    <span className="text-gray-700 leading-relaxed text-sm sm:text-base">{text}</span>
                                 </li>
                             ))}
                         </ul>
                         
                         {/* Mensaje navideño adicional */}
-                        <div className="mt-6 bg-gradient-to-r from-red-100 to-green-100 p-4 rounded-xl border-2 border-red-300 text-center">
-                            <p className="text-lg font-bold text-gray-800 flex items-center justify-center gap-2">
-                                🎄 <span className="text-red-700">¡Feliz Navidad!</span> ⛄ <span className="text-green-700">¡Próspero Año Nuevo 2026!</span> 🎅
+                        <div className="mt-4 sm:mt-6 bg-gradient-to-r from-red-100 to-green-100 p-3 sm:p-4 rounded-xl border-2 border-red-300 text-center">
+                            <p className="text-sm sm:text-lg font-bold text-gray-800 flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2">
+                                <span className="flex items-center gap-1">🎄 <span className="text-red-700">¡Feliz Navidad!</span></span>
+                                <span className="flex items-center gap-1">⛄ <span className="text-green-700">¡Próspero Año Nuevo 2025!</span> 🎅</span>
                             </p>
                         </div>
                     </div>
@@ -500,26 +503,26 @@ export default function CatastroSearch() {
 
                 {/* ADMIN PANEL mejorado */}
                 {isAdmin && (
-                    <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-8 shadow-2xl border-4 border-yellow-400 mb-8 animate-scale-in relative overflow-hidden">
+                    <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 sm:p-8 shadow-2xl border-4 border-yellow-400 mb-6 sm:mb-8 animate-scale-in relative overflow-hidden">
                         <div className="absolute top-0 right-0 w-40 h-40 bg-yellow-200 rounded-full opacity-20 blur-3xl animate-pulse"></div>
                         
-                        <h3 className='text-3xl font-bold mb-5 text-transparent bg-gradient-to-r from-yellow-700 to-orange-700 bg-clip-text flex items-center gap-3'>
-                            <Unlock size={32} className="text-yellow-600 animate-pulse" /> 
-                            Panel de Administración
+                        <h3 className='text-2xl sm:text-3xl font-bold mb-4 sm:mb-5 text-transparent bg-gradient-to-r from-yellow-700 to-orange-700 bg-clip-text flex items-center gap-2 sm:gap-3'>
+                            <Unlock size={28} className="text-yellow-600 animate-pulse flex-shrink-0" /> 
+                            <span className="leading-tight">Panel de Administración</span>
                         </h3>
                         
-                        <p className="text-xl mb-6 text-gray-700 bg-white/70 backdrop-blur-sm p-4 rounded-xl">
-                            Total de registros cargados: 
-                            <strong className="text-blue-600 text-3xl ml-2 font-black">{data.length}</strong>
+                        <p className="text-base sm:text-xl mb-4 sm:mb-6 text-gray-700 bg-white/70 backdrop-blur-sm p-3 sm:p-4 rounded-xl">
+                            Total de registros: 
+                            <strong className="text-blue-600 text-2xl sm:text-3xl ml-2 font-black">{data.length}</strong>
                         </p>
                         
-                        <div className="bg-gradient-to-r from-gray-100 to-gray-200 p-6 rounded-xl border-2 border-gray-300 text-gray-700 shadow-inner">
-                            <p className="font-bold text-lg mb-2 flex items-center gap-2">
-                                <span className="text-xl">ℹ️</span>
-                                Funcionalidad Desactivada
+                        <div className="bg-gradient-to-r from-gray-100 to-gray-200 p-4 sm:p-6 rounded-xl border-2 border-gray-300 text-gray-700 shadow-inner">
+                            <p className="font-bold text-base sm:text-lg mb-2 flex items-center gap-2">
+                                <span className="text-lg sm:text-xl">ℹ️</span>
+                                <span>Funcionalidad Desactivada</span>
                             </p>
-                            <p className="text-sm leading-relaxed">
-                                La gestión de datos (Cargar CSV, Limpiar) fue removida de esta versión para usar la carga automática desde <code className="bg-gray-300 px-2 py-1 rounded">/catastro.csv</code>
+                            <p className="text-xs sm:text-sm leading-relaxed">
+                                La gestión de datos (Cargar CSV, Limpiar) fue removida de esta versión para usar la carga automática desde <code className="bg-gray-300 px-2 py-1 rounded text-xs">/catastro.csv</code>
                             </p>
                         </div>
                     </div>
@@ -529,7 +532,7 @@ export default function CatastroSearch() {
             {/* BOTÓN ADMIN FLOTANTE premium navideño */}
             <button
                 onClick={() => isAdmin ? setIsAdmin(false) : setShowAdminLogin(true)}
-                className={`fixed bottom-8 right-8 p-5 rounded-full shadow-2xl transition-all duration-500 transform ${
+                className={`fixed bottom-6 right-6 sm:bottom-8 sm:right-8 p-4 sm:p-5 rounded-full shadow-2xl transition-all duration-500 transform ${
                     isAdmin 
                         ? 'bg-gradient-to-br from-red-500 to-green-600 hover:from-red-600 hover:to-green-700 rotate-0 animate-christmas-glow' 
                         : 'bg-gradient-to-br from-red-700 to-green-800 hover:from-red-800 hover:to-green-900 rotate-12'
@@ -537,30 +540,31 @@ export default function CatastroSearch() {
                 aria-label={isAdmin ? "Cerrar sesión" : "Iniciar sesión"}
             >
                 {isAdmin ? (
-                    <Unlock size={32} className="animate-pulse" />
+                    <Unlock size={28} className="sm:w-8 sm:h-8 animate-pulse" />
                 ) : (
                     <div className="relative">
-                        <Lock size={32} />
-                        <span className="absolute -top-2 -right-2 text-xl animate-swing">🎅</span>
+                        <Lock size={28} className="sm:w-8 sm:h-8" />
+                        <span className="absolute -top-2 -right-2 text-base sm:text-xl animate-swing">🎅</span>
                     </div>
                 )}
             </button>
 
             {/* MODAL LOGIN premium navideño */}
             {showAdminLogin && !isAdmin && (
-                <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 animate-scale-in">
-                    <div className="bg-gradient-to-br from-white to-red-50 p-8 rounded-3xl shadow-4xl w-full max-w-md transform transition-all duration-500 border-4 border-red-300 relative overflow-hidden">
+                <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 animate-scale-in p-4">
+                    <div className="bg-gradient-to-br from-white to-red-50 p-6 sm:p-8 rounded-3xl shadow-4xl w-full max-w-md transform transition-all duration-500 border-4 border-red-300 relative overflow-hidden">
                         {/* Decoraciones navideñas en el modal */}
                         <div className="absolute top-0 left-0 right-0 h-3 bg-gradient-to-r from-red-500 via-green-500 to-red-500"></div>
-                        <div className="absolute top-2 left-2 text-3xl animate-swing">🎄</div>
-                        <div className="absolute top-2 right-2 text-3xl animate-swing" style={{animationDelay: '0.5s'}}>🎅</div>
+                        <div className="absolute top-2 left-2 text-2xl sm:text-3xl animate-swing">🎄</div>
+                        <div className="absolute top-2 right-2 text-2xl sm:text-3xl animate-swing" style={{animationDelay: '0.5s'}}>🎅</div>
                         
                         <div className="absolute top-10 right-10 w-32 h-32 bg-red-200 rounded-full opacity-20 blur-3xl animate-pulse"></div>
                         <div className="absolute bottom-10 left-10 w-24 h-24 bg-green-200 rounded-full opacity-20 blur-2xl animate-pulse" style={{animationDelay: '0.5s'}}></div>
                         
                         <div className="relative z-10">
-                            <h4 className="text-3xl font-bold mb-6 text-transparent bg-gradient-to-r from-red-700 to-green-700 bg-clip-text border-b-2 border-red-200 pb-3 flex items-center justify-center gap-2">
-                                🔐 Acceso de Administrador
+                            <h4 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-transparent bg-gradient-to-r from-red-700 to-green-700 bg-clip-text border-b-2 border-red-200 pb-3 flex items-center justify-center gap-2">
+                                <span className="text-xl sm:text-2xl">🔐</span>
+                                <span className="leading-tight">Acceso de Administrador</span>
                             </h4>
                             
                             <input
@@ -568,20 +572,20 @@ export default function CatastroSearch() {
                                 value={adminPassword}
                                 onChange={(e) => setAdminPassword(e.target.value)}
                                 placeholder="Contraseña"
-                                className="border-2 border-red-300 p-4 mb-6 w-full rounded-xl focus:border-green-600 focus:ring-4 focus:ring-red-200 outline-none transition-all duration-300 text-lg"
+                                className="border-2 border-red-300 p-3 sm:p-4 mb-4 sm:mb-6 w-full rounded-xl focus:border-green-600 focus:ring-4 focus:ring-red-200 outline-none transition-all duration-300 text-base sm:text-lg"
                                 onKeyPress={(e) => e.key === 'Enter' && handleAdminLogin()}
                             />
                             
                             <button
                                 onClick={handleAdminLogin}
-                                className="bg-gradient-to-r from-red-600 to-green-600 hover:from-red-700 hover:to-green-700 text-white px-6 py-4 rounded-xl w-full font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:scale-[1.02] active:scale-95"
+                                className="bg-gradient-to-r from-red-600 to-green-600 hover:from-red-700 hover:to-green-700 text-white px-6 py-3 sm:py-4 rounded-xl w-full font-bold text-base sm:text-lg transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:scale-[1.02] active:scale-95"
                             >
                                 Entrar 🎄
                             </button>
                             
                             <button
                                 onClick={() => setShowAdminLogin(false)}
-                                className="mt-4 text-sm text-gray-600 hover:text-gray-800 w-full transition-all duration-300 font-semibold hover:underline"
+                                className="mt-3 sm:mt-4 text-xs sm:text-sm text-gray-600 hover:text-gray-800 w-full transition-all duration-300 font-semibold hover:underline"
                             >
                                 Cancelar
                             </button>
