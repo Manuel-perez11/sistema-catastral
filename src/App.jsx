@@ -4,12 +4,6 @@ import { Search, Lock, Unlock } from 'lucide-react';
 // Función auxiliar para normalizar cadenas: elimina acentos y la 'ñ' al compararlas
 const normalizeString = (str) => {
     if (!str) return '';
-    // 1. Normaliza a NFD (Canonical Decomposition Form, separa los caracteres base de los acentos)
-    // 2. Elimina todos los caracteres diacríticos (acentos, tildes)
-    // 3. Convierte a minúsculas
-    // 4. Se asegura de que la Ñ sea tratada como N si el navegador lo permite,
-    //    pero la decodificación UTF-8 ya debe haber arreglado la Ñ en la carga.
-    //    El enfoque principal es la eliminación de acentos para búsquedas flexibles.
     return str
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
@@ -28,7 +22,7 @@ export default function CatastroSearch() {
 
     const ADMIN_PASSWORD = 'admin2024';
 
-    // 🔹 CARGA AUTOMÁTICA DESDE PUBLIC (catastro.csv)
+    // 🔹 CARGA AUTOMÁTICA DESDE PUBLIC (catastro.csv) - Con solución UTF-8
     useEffect(() => {
         loadData();
     }, []);
@@ -36,8 +30,8 @@ export default function CatastroSearch() {
     const loadData = async () => {
         try {
             const res = await fetch('/catastro.csv');
-
-            // --- Solución UTF-8 para la carga del archivo CSV ---
+            
+            // Solución UTF-8: Usamos response.blob() y FileReader para forzar la lectura como UTF-8
             const blob = await res.blob();
             
             const reader = new FileReader();
@@ -59,7 +53,6 @@ export default function CatastroSearch() {
                 setData(parsed);
                 setLoading(false);
             };
-            // Solicitamos explícitamente la lectura como UTF-8
             reader.readAsText(blob, 'UTF-8');
 
             return; 
@@ -77,7 +70,6 @@ export default function CatastroSearch() {
             return;
         }
 
-        // Normalizamos el término de búsqueda para ignorar acentos y tildes
         const normalizedTerm = normalizeString(searchTerm);
 
         setFilteredResults(
@@ -103,12 +95,12 @@ export default function CatastroSearch() {
     if (loading) {
         return (
             // Diseño de carga avanzado
-            <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white">
-                <svg className="animate-spin h-10 w-10 text-blue-400 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white transition-all duration-500">
+                <svg className="animate-spin h-12 w-12 text-blue-400 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
-                <p className="text-xl font-medium text-gray-300">Cargando datos catastrales...</p>
+                <p className="text-2xl font-semibold text-gray-300 animate-pulse">Cargando datos catastrales...</p>
             </div>
         );
     }
@@ -124,13 +116,20 @@ export default function CatastroSearch() {
                 .animate-pulse-slow {
                     animation: pulse-slow 3s infinite ease-in-out;
                 }
+                @keyframes fade-in-down {
+                    from { opacity: 0; transform: translateY(-10px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+                .animate-fade-in-down {
+                    animation: fade-in-down 0.5s ease-out;
+                }
             `}</style>
 
             {/* Fondo degradado y sección principal */}
             <div className="bg-gradient-to-br from-blue-700 to-indigo-900 min-h-72 pt-8 pb-20 shadow-inner-xl">
                 <div className="max-w-4xl mx-auto px-4">
 
-                    {/* ENCABEZADO */}
+                    {/* ENCABEZADO - Animación de escalado al pasar el ratón */}
                     <header className="bg-white rounded-3xl shadow-3xl p-6 mb-8 flex flex-col sm:flex-row gap-4 items-center transform transition duration-500 hover:scale-[1.01] hover:shadow-4xl border border-gray-100">
                         <img 
                             src="/logo.png" 
@@ -147,10 +146,10 @@ export default function CatastroSearch() {
                     {/* TITULO */}
                     <div className="text-center mb-10 text-white">
                         <Search size={64} className="mx-auto mb-4 text-white p-3 bg-blue-500 rounded-full shadow-lg border-2 border-white/50 animate-pulse-slow" />
-                        <h1 className="text-5xl font-black tracking-tighter drop-shadow-lg">
+                        <h1 className="text-5xl font-black tracking-tighter drop-shadow-lg animate-in fade-in duration-700">
                             Sistema de Consulta de Clave Catastral
                         </h1>
-                        <p className="text-blue-200 mt-3 text-xl font-light">
+                        <p className="text-blue-200 mt-3 text-xl font-light animate-in fade-in duration-1000">
                             Ingresa tu nombre completo para obtener tu clave de forma rápida y segura.
                         </p>
                     </div>
@@ -160,7 +159,7 @@ export default function CatastroSearch() {
             {/* Contenido principal de la aplicación */}
             <div className="max-w-4xl mx-auto px-4 -mt-20">
 
-                {/* BUSCADOR */}
+                {/* BUSCADOR - Animación de sombra y borde */}
                 <div className="bg-white rounded-3xl shadow-4xl p-10 mb-8 transform transition duration-500 hover:shadow-5xl border border-gray-200">
                     <div className="relative">
                         <input
@@ -168,6 +167,7 @@ export default function CatastroSearch() {
                             placeholder="Escribe el nombre completo..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
+                            // Animación en el foco
                             className="w-full px-6 py-5 border-3 border-gray-300 rounded-2xl text-xl font-medium focus:border-blue-600 focus:ring-2 focus:ring-blue-300 outline-none transition duration-300 placeholder-gray-500 shadow-inner"
                         />
                         <Search className="absolute right-6 top-1/2 transform -translate-y-1/2 text-blue-500" size={24} />
@@ -178,7 +178,7 @@ export default function CatastroSearch() {
                             {filteredResults.length ? (
                                 <div className="space-y-4">
                                     {filteredResults.map((item) => (
-                                        // Diseño del resultado avanzado
+                                        // Resultados - Animación de entrada y hover
                                         <div key={item.id} className="bg-green-50 border-l-6 border-green-600 p-6 rounded-2xl shadow-lg transition duration-300 transform hover:scale-[1.02] hover:shadow-xl bg-gradient-to-r from-green-50 to-white animate-fade-in-down">
                                             <p className="font-extrabold text-gray-900 text-xl mb-1">{item.nombre}</p>
                                             <p className="font-mono text-green-700 text-3xl tracking-wider flex items-center gap-2">
@@ -188,7 +188,7 @@ export default function CatastroSearch() {
                                     ))}
                                 </div>
                             ) : (
-                                // Mensaje de error avanzado
+                                // Mensaje de error - Animación de entrada
                                 <div className="bg-red-100 border-l-6 border-red-600 p-5 rounded-xl shadow-md transition duration-300 animate-in fade-in">
                                     <p className="text-red-800 font-bold text-lg">
                                         😔 Lo sentimos, no se encontraron resultados para "{searchTerm}".
@@ -200,7 +200,7 @@ export default function CatastroSearch() {
                     )}
                 </div>
 
-                {/* INFORMACIÓN */}
+                {/* INFORMACIÓN - Se quitan los asteriscos y se mejora el diseño */}
                 <div className="bg-white bg-opacity-95 backdrop-blur-sm rounded-2xl p-6 text-gray-800 shadow-2xl border border-blue-100 mb-8 transition duration-300 hover:shadow-3xl">
                     <h3 className="text-2xl font-bold mb-4 text-blue-800 flex items-center gap-2">
                         <span className='text-3xl'>💡</span> Información Importante
@@ -208,15 +208,15 @@ export default function CatastroSearch() {
                     <ul className="text-base space-y-3 list-disc list-inside text-gray-700">
                         <li className="flex items-start">
                             <span className="font-semibold text-blue-600 mr-2">✓</span>
-                            Asegúrate de escribir tu **nombre completo** y correctamente. **Nota:** En caso de no aparecer con el nombre completo, asegúrate de que tu propiedad esté registrada en el Registro Público de la Propiedad.
+                            Asegúrate de escribir tu nombre completo y correctamente. Nota: En caso de no aparecer con el nombre completo, asegúrate de que tu propiedad esté registrada en el Registro Público de la Propiedad.
                         </li>
                         <li className="flex items-start">
                             <span className="font-semibold text-blue-600 mr-2">✓</span>
-                            La clave catastral es un requisito **indispensable** para realizar el pago de tu predial.
+                            La clave catastral es un requisito indispensable para realizar el pago de tu predial.
                         </li>
                         <li className="flex items-start">
                             <span className="font-semibold text-blue-600 mr-2">✓</span>
-                            Para dudas o aclaraciones, comunícate al número **(649) 526 0041** de Presidencia Municipal.
+                            Para dudas o aclaraciones, comunícate al número (649) 526 0041 de Presidencia Municipal.
                         </li>
                     </ul>
                 </div>
@@ -227,7 +227,7 @@ export default function CatastroSearch() {
                         <h3 className='text-3xl font-bold mb-5 text-yellow-800 flex items-center gap-3'><Unlock size={28} /> Panel de Administración</h3>
                         <p className="text-xl mb-4 text-gray-700">Total de registros cargados (CSV): <strong className="text-blue-600 text-2xl">{data.length}</strong></p>
                         
-                        <div className="bg-gray-100 p-4 rounded-lg border border-gray-300 text-gray-600">
+                        <div className="bg-gray-100 p-4 rounded-lg border border-gray-300 text-gray-600 animate-in fade-in duration-900">
                             <p className="font-semibold">Funcionalidad Desactivada:</p>
                             <p className="text-sm">La gestión de datos (Cargar CSV, Limpiar) fue removida de esta versión para usar la carga automática desde `/catastro.csv`.</p>
                         </div>
@@ -236,7 +236,7 @@ export default function CatastroSearch() {
 
             </div>
             
-            {/* BOTÓN ADMIN FLOTANTE */}
+            {/* BOTÓN ADMIN FLOTANTE - Animación de rotación y hover */}
             <button
                 onClick={() => isAdmin ? setIsAdmin(false) : setShowAdminLogin(true)}
                 className={`fixed bottom-8 right-8 p-4 rounded-full shadow-2xl transition duration-500 transform ${isAdmin ? 'bg-red-600 hover:bg-red-700 rotate-0' : 'bg-gray-800 hover:bg-gray-900 rotate-12'} text-white z-40 hover:scale-110`}
@@ -245,7 +245,7 @@ export default function CatastroSearch() {
                 {isAdmin ? <Unlock size={28} /> : <Lock size={28} />}
             </button>
 
-            {/* MODAL LOGIN ADMIN */}
+            {/* MODAL LOGIN ADMIN - Animación de entrada */}
             {showAdminLogin && !isAdmin && (
                 <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 animate-in fade-in duration-300">
                     <div className="bg-white p-8 rounded-2xl shadow-4xl w-full max-w-sm transform transition duration-500 scale-100 animate-in zoom-in-50">
