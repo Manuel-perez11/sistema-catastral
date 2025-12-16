@@ -355,41 +355,4 @@ export default function CatastroSearch() {
                   Formato del archivo CSV:
                 </p>
                 <p className="text-xs text-yellow-700 font-mono bg-yellow-100 p-2 rounded">
-                  Nombre,Clave Catastral<br/>
-                  Juan Pérez García,12-345-678<br/>
-                  María López Rodríguez,12-345-679<br/>
-                  José Muñoz Peña,12-345-680
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-```
-
----
-
-### **PASO 5: Conectar GitHub con Vercel**
-
-1. Ve a **https://vercel.com** (ya iniciaste sesión)
-2. Haz clic en **"Add New..."** → **"Project"**
-3. Haz clic en **"Import Git Repository"**
-4. Conecta tu cuenta de **GitHub** si aún no lo has hecho
-5. Busca tu repositorio `sistema-catastral`
-6. Haz clic en **"Import"**
-7. En la configuración:
-   - **Framework Preset**: Vite
-   - Deja todo lo demás como está
-8. Haz clic en **"Deploy"**
-9. **¡Espera 2-3 minutos!** ⏳
-
----
-
-### **PASO 6: ¡Tu sistema está en línea!** 🎉
-
-Vercel te dará una URL como:
-```
-https://sistema-catastral.vercel.app
+                  Nombre,Cl
