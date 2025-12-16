@@ -13,14 +13,25 @@ const normalizeString = (str) => {
 
 export default function CatastroSearch() {
     const [searchTerm, setSearchTerm] = useState('');
+    const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
     const [data, setData] = useState([]);
     const [filteredResults, setFilteredResults] = useState([]);
     const [isAdmin, setIsAdmin] = useState(false);
     const [adminPassword, setAdminPassword] = useState('');
     const [showAdminLogin, setShowAdminLogin] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [searching, setSearching] = useState(false);
 
     const ADMIN_PASSWORD = 'admin2024';
+
+    // 🔹 DEBOUNCE: Espera 500ms después de que el usuario deje de escribir
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setDebouncedSearchTerm(searchTerm);
+        }, 500); // Medio segundo de espera
+
+        return () => clearTimeout(timer);
+    }, [searchTerm]);
 
     // 🔹 CARGA AUTOMÁTICA DESDE PUBLIC (catastro.csv) - Con solución UTF-8
     useEffect(() => {
@@ -63,21 +74,29 @@ export default function CatastroSearch() {
         setLoading(false);
     };
 
-    // 🔎 FILTRADO MEJORADO para manejar acentos y la 'ñ'
+    // 🔎 FILTRADO MEJORADO para manejar acentos y la 'ñ' - Ahora usa debouncedSearchTerm
     useEffect(() => {
-        if (!searchTerm.trim()) {
+        if (!debouncedSearchTerm.trim()) {
             setFilteredResults([]);
+            setSearching(false);
             return;
         }
 
-        const normalizedTerm = normalizeString(searchTerm);
+        setSearching(true);
+        const normalizedTerm = normalizeString(debouncedSearchTerm);
 
-        setFilteredResults(
-            data.filter(item =>
-                normalizeString(item.nombre).includes(normalizedTerm)
-            )
-        );
-    }, [searchTerm, data]);
+        // Pequeño delay para mostrar indicador de búsqueda
+        const searchTimer = setTimeout(() => {
+            setFilteredResults(
+                data.filter(item =>
+                    normalizeString(item.nombre).includes(normalizedTerm)
+                )
+            );
+            setSearching(false);
+        }, 100);
+
+        return () => clearTimeout(searchTimer);
+    }, [debouncedSearchTerm, data]);
 
     const handleAdminLogin = () => {
         if (adminPassword === ADMIN_PASSWORD) {
@@ -371,12 +390,31 @@ export default function CatastroSearch() {
                                 onChange={(e) => setSearchTerm(e.target.value)}
                                 className="w-full px-6 py-5 pr-14 border-2 border-gray-300 rounded-2xl text-xl font-medium focus:border-blue-600 focus:ring-4 focus:ring-blue-200 outline-none transition-all duration-300 placeholder-gray-400 shadow-inner hover:border-blue-400 hover:shadow-lg"
                             />
-                            <Search className="absolute right-6 top-1/2 transform -translate-y-1/2 text-blue-500 transition-all duration-300 group-hover:scale-125 group-hover:rotate-12" size={28} />
+                            {searching ? (
+                                <div className="absolute right-6 top-1/2 transform -translate-y-1/2">
+                                    <svg className="animate-spin h-7 w-7 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                </div>
+                            ) : (
+                                <Search className="absolute right-6 top-1/2 transform -translate-y-1/2 text-blue-500 transition-all duration-300 group-hover:scale-125 group-hover:rotate-12" size={28} />
+                            )}
                         </div>
 
                         {searchTerm && (
                             <div className="mt-8">
-                                {filteredResults.length ? (
+                                {searching ? (
+                                    <div className="text-center py-8">
+                                        <p className="text-gray-500 text-lg flex items-center justify-center gap-2">
+                                            <svg className="animate-spin h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                            </svg>
+                                            Buscando...
+                                        </p>
+                                    </div>
+                                ) : filteredResults.length ? (
                                     <div className="space-y-4">
                                         {filteredResults.map((item, index) => (
                                             <div 
