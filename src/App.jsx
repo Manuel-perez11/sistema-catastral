@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Upload, Trash2, Download, Lock, Unlock } from 'lucide-react';
+import { Search, Lock, Unlock } from 'lucide-react';
 
 export default function CatastroSearch() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -12,32 +12,40 @@ export default function CatastroSearch() {
 
   const ADMIN_PASSWORD = 'admin2024';
 
+  // 🔹 CARGA AUTOMÁTICA DESDE PUBLIC (catastro.csv)
   useEffect(() => {
     loadData();
   }, []);
 
   const loadData = async () => {
     try {
-      // Intenta cargar datos
-      const result = await window.storage?.get('catastro-data');
-      if (result?.value) {
-        setData(JSON.parse(result.value));
+      const res = await fetch('/catastro.csv');
+      const text = await res.text();
+
+      const lines = text.split('\n');
+      const parsed = [];
+
+      for (let i = 1; i < lines.length; i++) {
+        const [nombre, clave] = lines[i].split(',');
+        if (nombre && clave) {
+          parsed.push({
+            id: i,
+            nombre: nombre.trim(),
+            claveCatastral: clave.trim(),
+          });
+        }
       }
-    } catch {
-      console.log('No hay datos previos');
+
+      setData(parsed);
+    } catch (error) {
+      console.error('Error cargando catastro.csv', error);
+      // Opcional: Mostrar un mensaje al usuario si la carga falla
     }
+
     setLoading(false);
   };
 
-  const saveData = async (newData) => {
-    try {
-      await window.storage?.set('catastro-data', JSON.stringify(newData));
-      setData(newData);
-    } catch {
-      alert('Error al guardar datos');
-    }
-  };
-
+  // 🔎 FILTRADO
   useEffect(() => {
     if (!searchTerm.trim()) {
       setFilteredResults([]);
@@ -46,59 +54,11 @@ export default function CatastroSearch() {
 
     const term = searchTerm.toLowerCase();
     setFilteredResults(
-      data.filter((item) =>
+      data.filter(item =>
         item.nombre.toLowerCase().includes(term)
       )
     );
   }, [searchTerm, data]);
-
-  const handleFileUpload = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const lines = event.target.result.split('\n');
-      const newData = [];
-
-      for (let i = 1; i < lines.length; i++) {
-        const [nombre, clave] = lines[i].split(',');
-        if (nombre && clave) {
-          newData.push({
-            id: Date.now() + i,
-            nombre: nombre.trim(),
-            claveCatastral: clave.trim(),
-          });
-        }
-      }
-
-      if (newData.length) {
-        saveData(newData);
-        alert(`Se cargaron ${newData.length} registros`);
-      }
-    };
-    reader.readAsText(file, 'UTF-8');
-  };
-
-  const downloadTemplate = () => {
-    const csv =
-      '\uFEFFNombre,Clave Catastral\nJuan Pérez García,12-345-678\nMaría López Rodríguez,12-345-679\nJosé Muñoz Peña,12-345-680';
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'plantilla_catastro.csv';
-    a.click();
-  };
-
-  const clearData = async () => {
-    if (confirm('¿Eliminar todos los registros?')) {
-      await window.storage?.delete('catastro-data');
-      setData([]);
-      setFilteredResults([]);
-      alert('Datos eliminados');
-    }
-  };
 
   const handleAdminLogin = () => {
     if (adminPassword === ADMIN_PASSWORD) {
@@ -113,7 +73,7 @@ export default function CatastroSearch() {
 
   if (loading) {
     return (
-      // Mejorado: Icono giratorio y fondo más oscuro
+      // Diseño de carga avanzado
       <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white">
         <svg className="animate-spin h-10 w-10 text-blue-400 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
@@ -126,6 +86,17 @@ export default function CatastroSearch() {
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
+      {/* Estilo para animación de pulsación lenta */}
+      <style jsx>{`
+        @keyframes pulse-slow {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.8; transform: scale(1.03); }
+        }
+        .animate-pulse-slow {
+          animation: pulse-slow 3s infinite ease-in-out;
+        }
+      `}</style>
+
       {/* Fondo degradado y sección principal */}
       <div className="bg-gradient-to-br from-blue-700 to-indigo-900 min-h-72 pt-8 pb-20 shadow-inner-xl">
         <div className="max-w-4xl mx-auto px-4">
@@ -146,17 +117,7 @@ export default function CatastroSearch() {
 
           {/* TITULO */}
           <div className="text-center mb-10 text-white">
-            {/* Animación mejorada: Icono con sombra y pulsación sutil */}
             <Search size={64} className="mx-auto mb-4 text-white p-3 bg-blue-500 rounded-full shadow-lg border-2 border-white/50 animate-pulse-slow" />
-            <style jsx>{`
-              @keyframes pulse-slow {
-                0%, 100% { opacity: 1; transform: scale(1); }
-                50% { opacity: 0.8; transform: scale(1.03); }
-              }
-              .animate-pulse-slow {
-                animation: pulse-slow 3s infinite ease-in-out;
-              }
-            `}</style>
             <h1 className="text-5xl font-black tracking-tighter drop-shadow-lg">
               Sistema de Consulta de Clave Catastral
             </h1>
@@ -178,7 +139,6 @@ export default function CatastroSearch() {
               placeholder="Escribe el nombre completo..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              // Mejorado: Borde más grueso en focus
               className="w-full px-6 py-5 border-3 border-gray-300 rounded-2xl text-xl font-medium focus:border-blue-600 focus:ring-2 focus:ring-blue-300 outline-none transition duration-300 placeholder-gray-500 shadow-inner"
             />
             <Search className="absolute right-6 top-1/2 transform -translate-y-1/2 text-blue-500" size={24} />
@@ -189,7 +149,7 @@ export default function CatastroSearch() {
               {filteredResults.length ? (
                 <div className="space-y-4">
                   {filteredResults.map((item) => (
-                    // Mejorado: Diseño del resultado con gradiente sutil y animación
+                    // Diseño del resultado avanzado
                     <div key={item.id} className="bg-green-50 border-l-6 border-green-600 p-6 rounded-2xl shadow-lg transition duration-300 transform hover:scale-[1.02] hover:shadow-xl bg-gradient-to-r from-green-50 to-white animate-fade-in-down">
                       <p className="font-extrabold text-gray-900 text-xl mb-1">{item.nombre}</p>
                       <p className="font-mono text-green-700 text-3xl tracking-wider flex items-center gap-2">
@@ -199,7 +159,7 @@ export default function CatastroSearch() {
                   ))}
                 </div>
               ) : (
-                // Mejorado: Mensaje de error más grande
+                // Mensaje de error avanzado
                 <div className="bg-red-100 border-l-6 border-red-600 p-5 rounded-xl shadow-md transition duration-300 animate-in fade-in">
                   <p className="text-red-800 font-bold text-lg">
                     😔 Lo sentimos, no se encontraron resultados para "{searchTerm}".
@@ -211,7 +171,7 @@ export default function CatastroSearch() {
           )}
         </div>
 
-        {/* INFORMACIÓN */}
+        {/* INFORMACIÓN (Añadido para mejorar la experiencia de usuario) */}
         <div className="bg-white bg-opacity-95 backdrop-blur-sm rounded-2xl p-6 text-gray-800 shadow-2xl border border-blue-100 mb-8 transition duration-300 hover:shadow-3xl">
           <h3 className="text-2xl font-bold mb-4 text-blue-800 flex items-center gap-2">
             <span className='text-3xl'>💡</span> Información Importante
@@ -232,40 +192,15 @@ export default function CatastroSearch() {
           </ul>
         </div>
 
-        {/* ADMIN */}
+        {/* ADMIN (Se conserva el diseño, aunque la funcionalidad de gestión fue removida) */}
         {isAdmin && (
           <div className="bg-white rounded-2xl p-8 shadow-3xl border-4 border-yellow-500 mb-8 animate-in fade-in duration-700">
             <h3 className='text-3xl font-bold mb-5 text-yellow-800 flex items-center gap-3'><Unlock size={28} /> Panel de Administración</h3>
-            <p className="text-xl mb-4 text-gray-700">Total de registros cargados: <strong className="text-blue-600 text-2xl">{data.length}</strong></p>
-
-            <div className="flex gap-4 flex-wrap mt-6">
-              {/* Botón Cargar CSV */}
-              <label className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl cursor-pointer flex items-center gap-2 font-bold transition duration-300 shadow-lg hover:shadow-xl transform hover:translate-y-[-2px]">
-                <Upload size={20} /> Cargar CSV
-                <input type="file" accept=".csv" onChange={handleFileUpload} className="hidden" />
-              </label>
-
-              {/* Botón Plantilla */}
-              <button 
-                onClick={downloadTemplate} 
-                className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl flex items-center gap-2 font-bold transition duration-300 shadow-lg hover:shadow-xl transform hover:translate-y-[-2px]"
-              >
-                <Download size={20} /> Descargar Plantilla
-              </button>
-
-              {/* Botón Limpiar */}
-              <button 
-                onClick={clearData} 
-                className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl flex items-center gap-2 font-bold transition duration-300 shadow-lg hover:shadow-xl transform hover:translate-y-[-2px]"
-              >
-                <Trash2 size={20} /> Limpiar Datos
-              </button>
-            </div>
-
-            <div className="mt-6 bg-yellow-50 p-4 rounded-lg border border-yellow-300">
-              <p className="text-sm font-mono text-yellow-800">
-                Formato CSV requerido: <code className='font-bold'>Nombre,Clave Catastral</code>
-              </p>
+            <p className="text-xl mb-4 text-gray-700">Total de registros cargados (CSV): <strong className="text-blue-600 text-2xl">{data.length}</strong></p>
+            
+            <div className="bg-gray-100 p-4 rounded-lg border border-gray-300 text-gray-600">
+                <p className="font-semibold">Funcionalidad Desactivada:</p>
+                <p className="text-sm">La gestión de datos (Cargar CSV, Limpiar) fue removida de esta versión para usar la carga automática desde `/catastro.csv`.</p>
             </div>
           </div>
         )}
